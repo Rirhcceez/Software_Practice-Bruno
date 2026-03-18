@@ -1,11 +1,11 @@
 info:
-  name: valid login
+  name: 01_Valid_login
   type: http
   seq: 1
 
 http:
   method: POST
-  url: http://localhost:5000/auth/login
+  url: "{{base_url}}/auth/login"
   body:
     type: json
     data: |-
@@ -15,7 +15,7 @@ http:
       }
   auth:
     type: bearer
-    token: ""
+    token: "{{myBearerToken}}"
 
 runtime:
   scripts:
@@ -26,6 +26,10 @@ runtime:
           bru.setEnvVar("myBearerToken", data.accessToken);
           console.log("Token saved successfully!"); 
         }
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
 
 settings:
   encodeUrl: true

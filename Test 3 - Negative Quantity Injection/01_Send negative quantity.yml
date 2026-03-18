@@ -1,21 +1,27 @@
 info:
-  name: Send a Order
+  name: 01_Send negative quantity
   type: http
-  seq: 5
+  seq: 1
 
 http:
   method: POST
-  url: http://localhost:5000/orders
+  url: "{{base_url}}/orders"
   body:
     type: json
     data: |-
       {
-        "itemId": 2,
-        "quantity": 1
+        "itemId": 1,
+        "quantity": -3
       }
   auth:
     type: bearer
     token: "{{myBearerToken}}"
+
+runtime:
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "400"
 
 settings:
   encodeUrl: true

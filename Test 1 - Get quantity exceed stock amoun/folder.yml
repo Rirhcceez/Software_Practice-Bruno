@@ -1,0 +1,7 @@
+info:
+  name: "Test 1 : Get quantity exceed stock amoun"
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

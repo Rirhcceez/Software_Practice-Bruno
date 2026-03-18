@@ -1,0 +1,7 @@
+info:
+  name: "Test 2 : Total price calculation"
+  type: folder
+  seq: 2
+
+request:
+  auth: inherit

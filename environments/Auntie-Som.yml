@@ -1,1 +1,6 @@
 name: Auntie-Som
+variables:
+  - name: myBearerToken
+    value: c50b8001-874b-4f33-a061-bbd92a15b71a
+  - name: base_url
+    value: http://localhost:5000

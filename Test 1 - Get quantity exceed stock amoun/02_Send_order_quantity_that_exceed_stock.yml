@@ -1,31 +1,34 @@
 info:
-  name: valid login
+  name: 02_Send_order_quantity_that_exceed_stock
   type: http
   seq: 2
 
 http:
   method: POST
-  url: http://localhost:5000/auth/login
+  url: "{{base_url}}/orders"
   body:
     type: json
     data: |-
       {
-        "username": "student",
-        "password": "hungry"
+        "itemId": 2,
+        "quantity": 2
       }
   auth:
     type: bearer
-    token: ""
+    token: "{{myBearerToken}}"
 
 runtime:
   scripts:
     - type: after-response
       code: |-
         const data = res.getBody();
-        if (data && data.accessToken) {
-          bru.setEnvVar("myBearerToken", data.accessToken);
-          console.log("Token saved successfully!"); 
+        if (data) {
+          bru.setEnvVar("orderId", data.orderId); 
         }
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "400"
 
 settings:
   encodeUrl: true

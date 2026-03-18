@@ -1,0 +1,37 @@
+info:
+  name: 01_Send_a_order
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/orders"
+  body:
+    type: json
+    data: |-
+      {
+        "itemId": 1,
+        "quantity": 1
+      }
+  auth:
+    type: bearer
+    token: "{{myBearerToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const data = res.getBody();
+        if (data) {
+          bru.setEnvVar("orderId", data.orderId); 
+        }
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

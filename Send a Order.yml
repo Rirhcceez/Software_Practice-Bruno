@@ -1,0 +1,24 @@
+info:
+  name: Send a Order
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: http://localhost:5000/orders
+  body:
+    type: json
+    data: |-
+      {
+        "itemId": 2,
+        "quantity": 1
+      }
+  auth:
+    type: bearer
+    token: "{{myBearerToken}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
